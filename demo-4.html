@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>Marvina Slider Demo</title>
+<link rel="stylesheet" href="assets/css/marvina-slider.min.css" />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="background">
+<main>
+    <div id="demo-4">
+        <div class="ms-slider-element" style="background-image:url('http://52.224.223.200/libraries/marvina-slider/demo-images/desk01.jpeg');">
+            <div class="container active">
+                <h1>LOREM</h1>
+                <h2>Ipsum Dolor Sit Amet</h2>
+                <p>Etiam sed enim ligula. Curabitur eu neque vitae diam venenatis condimentum.</p>
+            </div>
+        </div>
+        <div class="ms-slider-element" style="background-image:url('http://52.224.223.200/libraries/marvina-slider/demo-images/desk02.jpeg');">
+            <div class="container">
+                <h1>LOREM</h1>
+                <h2>Ipsum Dolor Sit Amet</h2>
+                <p>Etiam sed enim ligula. Curabitur eu neque vitae diam venenatis condimentum.</p>
+            </div>
+        </div>
+        <div class="ms-slider-element" style="background-image:url('http://52.224.223.200/libraries/marvina-slider/demo-images/desk03.jpg');">
+            <div class="container">
+                <h1>LOREM</h1>
+                <h2>Ipsum Dolor Sit Amet</h2>
+                <p>Etiam sed enim ligula. Curabitur eu neque vitae diam venenatis condimentum.</p>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="assets/js/marvina-slider.min.js"></script>
+<script>
+var demo = document.querySelector('#demo-4'),
+slider = new MarvinaSlider.Slider({
+    el: demo,
+    duration: 2500,
+    autoPlay: true,
+    autoPlaySpeed: 7500
+});
+
+var transitionEnd = ['webkitTransitionEnd', 'mozTransitionEnd', 'oTransitionEnd', 'MSTransitionEnd', 'transitionend'];
+function addMultiEventListenerOnce(el, events, callback) {
+    var cb = function(e) {
+        for(var i=0; i<events.length; i++) {
+            el.removeEventListener(events[i], callback, true);
+        }
+        callback(e);
+    };
+
+    for(var i=0; i<events.length; i++) {
+        el.addEventListener(events[i], callback, true);
+    }
+}
+
+slider.beforeCallback = function(prev, next) {
+    return new Promise(function(resolve) {
+        var container = prev.el.querySelector('.container');
+        container.classList.remove('active');
+        addMultiEventListenerOnce(container, transitionEnd, function() {
+            resolve();
+        });
+    });
+}
+
+slider.afterCallback = function(next, prev) {
+    return new Promise(function(resolve) {
+        var container = next.el.querySelector('.container');
+        container.classList.add('active');
+        addMultiEventListenerOnce(container, transitionEnd, function() {
+            resolve();
+        });
+    });
+}
+
+function setDemoSize() {
+    var height = Math.floor(demo.offsetWidth / 1.77);
+    demo.style.height = ((height > 450) ? height : 450) + 'px';
+}
+
+addEventListener('load', setDemoSize);
+window.addEventListener('resize', setDemoSize);
+</script>
+</body>
+</html>

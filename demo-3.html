@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>Marvina Slider Demo</title>
+<link rel="stylesheet" href="assets/css/marvina-slider.min.css" />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="background-2">
+<main>
+    <div id="demo-3">
+        <div class="ms-slider-element" style="background-image:url('http://52.224.223.200/libraries/marvina-slider/demo-images/cityauckland.jpg');" ms-id="auckland"></div>
+        <div class="ms-slider-element" style="background-image:url('http://52.224.223.200/libraries/marvina-slider/demo-images/citydubai.jpg');" ms-id="dubai"></div>
+        <div class="ms-slider-element" style="background-image:url('http://52.224.223.200/libraries/marvina-slider/demo-images/citylondon.jpg');" ms-id="london"></div>
+        <div class="ms-slider-element" style="background-image:url('http://52.224.223.200/libraries/marvina-slider/demo-images/citymajorca.jpg');" ms-id="majorca"></div>
+        <div class="ms-slider-element" style="background-image:url('http://52.224.223.200/libraries/marvina-slider/demo-images/citymelbourne.jpg');" ms-id="melbourne"></div>
+        <h1>AUCKLAND</h1>
+    </div>
+    <div id="list-container">
+        <ul id="list">
+            <li><div style="background-image:url('http://52.224.223.200/libraries/marvina-slider/demo-images/cityauckland.jpg');"></div></li>
+            <li><div style="background-image:url('http://52.224.223.200/libraries/marvina-slider/demo-images/citydubai.jpg');"></div></li>
+            <li><div style="background-image:url('http://52.224.223.200/libraries/marvina-slider/demo-images/citylondon.jpg');"></div></li>
+            <li><div style="background-image:url('http://52.224.223.200/libraries/marvina-slider/demo-images/citymajorca.jpg');"></div></li>
+            <li><div style="background-image:url('http://52.224.223.200/libraries/marvina-slider/demo-images/citymelbourne.jpg');"></div></li>
+        </ul>
+    </div>
+</main>
+<script src="assets/js/marvina-slider.min.js"></script>
+<script>
+var demo = document.querySelector('#demo-3'),
+    list = document.querySelector('#list'),
+    slider = new MarvinaSlider.Slider({
+        el: demo,
+        timing: 'cubic-bezier(.51,.21,.83,.76)',
+        list: false,
+        asList: list,
+        imageSettings: [
+            { id:'auckland', sliderType:MarvinaSlider.SliderType.Flow },
+            { id:'london',  sliderType:MarvinaSlider.SliderType.Flow },
+            { id:'majorca',  sliderType:MarvinaSlider.SliderType.Fade },
+        ]
+    });
+
+var cities = ['AUCKLAND', 'DUBAI', 'LONDON', 'MAJORCA', 'MELBOURNE'],
+    title = demo.querySelector('h1');
+slider.el.addEventListener('change', function() {
+    title.innerHTML = cities[slider.getIndex()];
+});
+
+var li = list.firstElementChild;
+function setDemoSize() {
+    demo.style.height = Math.floor(demo.offsetWidth / 1.77) + 'px';
+    list.style.height = Math.floor(li.offsetWidth / 1.77) + 'px';
+}
+
+addEventListener('load', setDemoSize);
+window.addEventListener('resize', setDemoSize);
+</script>
+</body>
+</html>
