@@ -14,10 +14,10 @@ body[class*="background"] {
     background-repeat:no-repeat;
 }
 body.background {
-    background-image:url('http://52.224.223.200/libraries/marvina-slider/demo-images/background.jpg');
+    background-image:url('http://cevadtokatli.com/libraries/marvina_slider/background.jpg');
 }
 body.background-2 {
-    background-image:url('http://52.224.223.200/libraries/marvina-slider/demo-images/background-2.jpg');
+    background-image:url('http://cevadtokatli.com/libraries/marvina_slider/background.jpg');
     background-position:center center;
 }
 body.background-2:before {
